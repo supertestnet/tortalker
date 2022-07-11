@@ -15,3 +15,21 @@ server {
     }
 }
 ```
+
+Here is my systemd service file (which I put into `/etc/systemd/system`):
+
+```
+[Unit]
+Description=Tortalker as systemd service
+After=network-online.target
+
+[Service]
+User=debian
+WorkingDirectory=/home/debian/tortalker/
+ExecStart=nohup python tortalker.py &
+SyslogIdentifier=tortalker-starter
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
